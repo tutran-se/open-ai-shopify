@@ -25,15 +25,14 @@ const PromptForm = () => {
             id="prompt"
             type="text"
             placeholder="Your Prompt... e.g: How to open online store on Shopify?"
-            size={"lg"}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
+            autoFocus={true}
           />
         </FormControl>
         <FormControl>
           <Select
             defaultValue={engineId}
-            size={"lg"}
             onChange={(e) => setEngineId(e.target.value)}
           >
             <option value="text-davinci-002">Engine: text-davinci-002</option>
