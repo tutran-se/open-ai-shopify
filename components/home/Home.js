@@ -1,25 +1,12 @@
 import { Button, Center, Heading, Link, Text, VStack } from "@chakra-ui/react";
-import Image from "next/image";
 import React from "react";
-import styled from "styled-components";
-import logoSrc from "../../public/assets/logo-small.png";
 import { BsGoogle, BsGithub } from "react-icons/bs";
-const Logo = styled.div`
-  position: relative;
-  width: 50px;
-  height: 50px;
-`;
+import Logo from "../logo/Logo";
+
 const Home = () => {
   return (
     <Center h="100vh" color="white" flexDirection="column">
-      <Logo className="vibrate-1">
-        <Image
-          src={logoSrc}
-          alt="Open AI - Shopify"
-          layout="fill"
-          objectFit="cover"
-        />
-      </Logo>
+      <Logo className="vibrate-1" />
       <Heading size="3xl" className="tracking-in-contract">
         Open AI
       </Heading>
