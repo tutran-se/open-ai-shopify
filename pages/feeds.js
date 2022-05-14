@@ -1,18 +1,19 @@
 import { Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
+import Feeds from "../components/feeds/Feeds";
 import Layout from "../components/layout/Layout";
-const Feeds = () => {
+const FeedsPage = () => {
   return (
     <>
       <Head>
         <title>Feeds | Open AI - Shopify Challenge</title>
       </Head>
       <Layout>
-        <Heading>Feeds</Heading>
+        <Feeds />
       </Layout>
     </>
   );
 };
 
-export default Feeds;
+export default FeedsPage;
