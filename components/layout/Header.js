@@ -6,7 +6,6 @@ import {
   HStack,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
@@ -27,6 +26,8 @@ import Logo from "../logo/Logo";
 import { BsFillMoonFill, BsFillSunFill, BsFillBellFill } from "react-icons/bs";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { AiOutlinePoweroff } from "react-icons/ai";
+import NextLink from "next/link";
+
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -124,10 +125,11 @@ const Header = () => {
           </MenuButton>
           <MenuList>
             <MenuGroup>
-              <MenuItem py={4}>
-                {" "}
-                <RiUserSettingsLine size={15} /> &nbsp; Account Settings
-              </MenuItem>
+              <NextLink href="/accountSettings">
+                <MenuItem py={4}>
+                  <RiUserSettingsLine size={15} /> &nbsp; Account Settings
+                </MenuItem>
+              </NextLink>
               <MenuItem py={4}>
                 {" "}
                 <AiOutlinePoweroff size={15} /> &nbsp;&nbsp;Log Out{" "}

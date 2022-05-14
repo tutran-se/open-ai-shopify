@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  FormControl,
-  Heading,
-  Input,
-  Select,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, FormControl, Input, Select, VStack } from "@chakra-ui/react";
 
 const PromptForm = () => {
   const [prompt, setPrompt] = useState("");
@@ -52,7 +44,7 @@ const PromptForm = () => {
           // loadingText="Processing..."
           // isLoading={true}
         >
-          Get Result
+          🚀 Get Result
         </Button>
       </VStack>
     </form>
