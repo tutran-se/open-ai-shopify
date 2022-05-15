@@ -11,6 +11,8 @@ import {
   increment,
   updateDoc,
   doc,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 import { auth, db } from "../../config/firebase";
@@ -99,4 +101,20 @@ export const useGetResultLists = ({ pageSize }) => {
     getTotalCount();
   }, [data]);
   return { total, data, isLoading, isLoading2 };
+};
+
+// like or unlike
+export const updateLike = async ({ action, itemId }) => {
+  try {
+    const { uid } = auth.currentUser;
+    let incrementAmount = action === "LIKE" ? 1 : -1;
+
+    const docRef = doc(db, "feeds", itemId);
+    await updateDoc(docRef, {
+      totalLike: increment(incrementAmount),
+      whoLikes: action === "LIKE" ? arrayUnion(uid) : arrayRemove(uid),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

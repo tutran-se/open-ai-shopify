@@ -4,15 +4,17 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Tooltip } from "@chakra-ui/react";
 import { auth } from "../../config/firebase";
 import { format, formatDistance } from "date-fns";
+import { updateLike } from "../../libs/feeds";
 
 const ResultItem = ({ item }) => {
   const {
+    id,
     answer,
     createdAt,
     prompt,
     totalLike,
     whoLikes,
-    creator: { displayName, email, photoURL, uid },
+    creator: { displayName, photoURL, uid },
   } = item;
   const user = auth.currentUser;
   const isLikedByCurrentUser =
@@ -63,10 +65,18 @@ const ResultItem = ({ item }) => {
         {totalLike > 0 && <Text fontSize={14}>{totalLike}</Text>}
 
         {isLikedByCurrentUser && (
-          <AiFillHeart color="#ff6c6c" cursor={"pointer"} />
+          <AiFillHeart
+            color="#ff6c6c"
+            cursor={"pointer"}
+            onClick={() => updateLike({ action: "REMOVE_LIKE", itemId: id })}
+          />
         )}
         {!isLikedByCurrentUser && (
-          <AiOutlineHeart color="#ff6c6c" cursor={"pointer"} />
+          <AiOutlineHeart
+            color="#ff6c6c"
+            cursor={"pointer"}
+            onClick={() => updateLike({ action: "LIKE", itemId: id })}
+          />
         )}
       </HStack>
     </Box>
