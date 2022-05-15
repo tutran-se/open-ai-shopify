@@ -19,6 +19,7 @@ import { auth, db } from "../../config/firebase";
 import { getAnswer } from "../../config/axios";
 import { useState, useEffect } from "react";
 import { createNotification } from "../notifications";
+import { useAuth } from "../../components/context/AuthContextProvider";
 
 // create an item
 
@@ -62,7 +63,7 @@ export const useGetResultLists = ({ pageSize }) => {
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
-
+  const { userInfo, setUserInfo } = useAuth();
   const getTotalCount = async () => {
     try {
       const docRef = doc(db, "appInfo", "totalFeedsCount");
@@ -91,6 +92,12 @@ export const useGetResultLists = ({ pageSize }) => {
         const item = { id: doc.id, ...doc.data() };
         items.push(item);
       });
+      const user =
+        items.find((item) => item.creator.uid === auth.currentUser.uid)
+          ?.creator || null;
+      if (user) {
+        setUserInfo({ ...userInfo, photoURL: user.photoURL });
+      }
       setData(items);
       setIsLoading(false);
       setIsLoading2(false);
