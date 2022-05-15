@@ -97,7 +97,6 @@ const ResultList = () => {
   const { total, data, isLoading, isLoading2 } = useGetResultLists({
     pageSize,
   });
-  console.log(data);
 
   return (
     <Box mt={"16"}>

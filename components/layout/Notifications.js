@@ -25,7 +25,6 @@ import { formatDistance } from "date-fns";
 
 const Notifications = () => {
   const { data } = useGetAllNotifications();
-  console.log(data);
   const notificationNumbers = data.length;
   return (
     <Popover isLazy placement="auto" autoFocus={false}>

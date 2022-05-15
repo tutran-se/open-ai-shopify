@@ -7,7 +7,7 @@ import Logo from "../logo/Logo";
 const Home = () => {
   const { loginWithGoogle, loginWithGitHub } = useAuth();
   return (
-    <Center h="100vh" color="white" flexDirection="column">
+    <Center h="100vh" flexDirection="column">
       <Logo className="vibrate-1" />
       <Heading size="3xl" className="tracking-in-contract">
         Open AI
