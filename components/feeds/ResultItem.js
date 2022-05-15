@@ -14,14 +14,11 @@ const ResultItem = ({ item }) => {
     prompt,
     totalLike,
     whoLikes,
-    creator: { displayName, photoURL, uid },
+    creator: { displayName, photoURL },
   } = item;
   const user = auth.currentUser;
   const isLikedByCurrentUser =
     whoLikes.find((item) => item === user.uid) || false;
-
-  const avatarPhotoURL =
-    (user.uid === uid && user.photoURL !== photoURL && user.photoURL) || null;
   return (
     <Box
       border={"1px"}
@@ -34,11 +31,7 @@ const ResultItem = ({ item }) => {
         <HStack>
           <Tooltip label={displayName}>
             <WrapItem>
-              <Avatar
-                name={displayName}
-                src={avatarPhotoURL || photoURL}
-                size={"sm"}
-              />
+              <Avatar name={displayName} src={photoURL} size={"sm"} />
             </WrapItem>
           </Tooltip>
 

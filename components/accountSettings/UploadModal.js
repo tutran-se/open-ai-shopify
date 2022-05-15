@@ -20,8 +20,16 @@ import {
 } from "@chakra-ui/react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../context/AuthContextProvider";
-import { auth, storage } from "../../config/firebase";
+import { auth, db, storage } from "../../config/firebase";
 import { updateProfile } from "firebase/auth";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 const canvasToFile = (canvas) => {
   const promise = new Promise((resolve) => {
@@ -90,12 +98,40 @@ const UploadModal = ({
           updateProfile(auth.currentUser, {
             photoURL: downloadURL,
           })
-            .then(() => {
+            .then(async () => {
               // Profile updated!
               // ...
               setUserInfo({ ...userInfo, photoURL: downloadURL });
-              setIsLoading(false);
-              onClose();
+
+              // update all feed items that belong to this user
+              const q = query(
+                collection(db, "feeds"),
+                where("creator.uid", "==", auth.currentUser.uid)
+              );
+              try {
+                const querySnapshot = await getDocs(q);
+                const allFeedIds = [];
+                querySnapshot.forEach((doc) => {
+                  // doc.data() is never undefined for query doc snapshots
+                  allFeedIds.push(doc.id);
+                  // console.log(doc.id, " => ", doc.data());
+                });
+                console.log(allFeedIds);
+
+                for (const id of allFeedIds) {
+                  console.log("run");
+                  console.log(downloadURL);
+                  const docRef = doc(db, "feeds", id);
+                  await updateDoc(docRef, {
+                    "creator.photoURL": downloadURL,
+                  });
+                }
+                setIsLoading(false);
+                onClose();
+                console.log("Finish Updated.");
+              } catch (error) {
+                console.log(error);
+              }
             })
             .catch((error) => {
               console.log(error);
