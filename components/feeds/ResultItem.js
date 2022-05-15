@@ -1,6 +1,6 @@
-import { Box, HStack, Text, WrapItem } from "@chakra-ui/react";
+import { Box, HStack, Tag, Text, WrapItem } from "@chakra-ui/react";
 import React from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineSetting } from "react-icons/ai";
 import { Tooltip } from "@chakra-ui/react";
 import { auth } from "../../config/firebase";
 import { format, formatDistance } from "date-fns";
@@ -9,12 +9,12 @@ import Image from "next/image";
 
 const ResultItem = ({ item }) => {
   const {
-    id,
     answer,
     createdAt,
     prompt,
     totalLike,
     whoLikes,
+    engineId,
     creator: { displayName, photoURL },
   } = item;
   const user = auth.currentUser;
@@ -35,8 +35,8 @@ const ResultItem = ({ item }) => {
               cursor="pointer"
               position={"relative"}
               overflow="hidden"
-              width={"30px"}
-              height="30px"
+              width={"35px"}
+              height="35px"
               borderRadius={"100%"}
             >
               <Image
@@ -49,7 +49,9 @@ const ResultItem = ({ item }) => {
           </Tooltip>
 
           <Box>
-            <Text fontSize={14}>{prompt}</Text>
+            <Text fontSize={14} fontWeight="medium">
+              {prompt}
+            </Text>
             {createdAt && (
               <Text fontSize={12} color="gray.400">
                 {formatDistance(new Date(createdAt?.toDate()), new Date(), {
@@ -58,11 +60,17 @@ const ResultItem = ({ item }) => {
                 &nbsp;({format(new Date(createdAt?.toDate()), "dd MMM, yyyy")})
               </Text>
             )}
+            <Text mt={2}>
+              <Tag colorScheme="green">
+                <AiOutlineSetting />
+                &nbsp;{engineId}
+              </Tag>
+            </Text>
           </Box>
         </HStack>
       </Box>
       <Text padding={4} fontSize={14} fontStyle="italic">
-        &quot;{answer} &quot;
+        &quot;{answer.trim()}&quot;
       </Text>
       <Text
         px={4}
@@ -71,7 +79,7 @@ const ResultItem = ({ item }) => {
         color={"gray.400"}
         textAlign="right"
       >
-        - Open AI
+        🤖 Open AI
       </Text>
 
       <HStack p={4}>

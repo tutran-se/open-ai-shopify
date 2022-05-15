@@ -32,6 +32,7 @@ export const createFeed = async ({ prompt, engineId }) => {
       createdAt: serverTimestamp(),
       prompt,
       answer: data.choices[0].text,
+      engineId,
       totalLike: 0,
       whoLikes: [],
     });

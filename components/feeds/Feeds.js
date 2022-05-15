@@ -1,11 +1,29 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Heading, Link, Text } from "@chakra-ui/react";
 import React from "react";
 import PromptForm from "./PromptForm";
 import ResultList from "./ResultList";
+import styled from "styled-components";
 
 const Feeds = () => {
   return (
-    <Box mt={5} p={4} py={8}>
+    <Box p={4} py={8}>
+      <Alert status="info">
+        <AlertIcon />
+        <Text>
+          &quot;To experience real-time updates, please open 2 browser tabs or
+          login with 2 accounts simultaneously. Hope you like it&quot;. -{" "}
+          <Link
+            textDecor="underline"
+            href="https://github.com/tutran-se"
+            target="_blank"
+          >
+            tutran
+          </Link>
+          🙋‍♂️
+        </Text>
+      </Alert>
+      <br />
+      <br />
       <Text fontSize={15} textAlign="center">
         Open AI - Shopify Challenge 2022
       </Text>

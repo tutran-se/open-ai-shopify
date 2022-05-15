@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Badge,
@@ -22,18 +22,25 @@ import {
   useGetAllNotifications,
 } from "../../libs/notifications";
 import { formatDistance } from "date-fns";
+import Image from "next/image";
 
 const Notifications = () => {
   const { data } = useGetAllNotifications();
   const notificationNumbers = data.length;
+  const [isOpen, setIsOpen] = useState(false);
+  const onClickClose = async () => {
+    setIsOpen(false);
+    await clearAllNotifications({ items: data });
+  };
   return (
-    <Popover isLazy placement="auto" autoFocus={false}>
+    <Popover isLazy placement="auto" autoFocus={false} isOpen={isOpen}>
       <PopoverTrigger>
         <Text
           color={"gray.400"}
           display="flex"
           cursor={"pointer"}
           position="relative"
+          onClick={() => setIsOpen(true)}
         >
           <BsFillBellFill size={20} />
           {notificationNumbers !== 0 && (
@@ -49,17 +56,16 @@ const Notifications = () => {
           )}
         </Text>
       </PopoverTrigger>
+
       <PopoverContent>
         {notificationNumbers !== 0 && (
           <>
             <PopoverHeader fontWeight="semibold" py={4}>
-              Notification {notificationNumbers > 1 ? "s" : ""} [
+              Notification{notificationNumbers > 1 ? "s" : ""} [
               {notificationNumbers}]
             </PopoverHeader>
             <PopoverArrow />
-            <PopoverCloseButton
-              onClick={() => clearAllNotifications({ items: data })}
-            />
+            <PopoverCloseButton onClick={onClickClose} />
             <PopoverBody p={4}>
               <VStack spacing={4}>
                 {data.map((item) => (
@@ -68,11 +74,19 @@ const Notifications = () => {
                     display="flex"
                     justifyContent="space-between"
                   >
-                    <WrapItem>
-                      <Avatar
-                        name={item.sender.displayName}
+                    <WrapItem
+                      cursor="pointer"
+                      position={"relative"}
+                      overflow="hidden"
+                      width={"30px"}
+                      height="30px"
+                      borderRadius={"100%"}
+                    >
+                      <Image
                         src={item.sender.photoURL}
-                        size={"sm"}
+                        alt="avatar"
+                        objectFit="cover"
+                        layout="fill"
                       />
                     </WrapItem>
                     <Box>
@@ -100,9 +114,9 @@ const Notifications = () => {
           <>
             <PopoverHeader fontWeight="semibold">No Notification</PopoverHeader>
             <PopoverArrow />
-            <PopoverCloseButton />
+            <PopoverCloseButton onClick={() => setIsOpen(false)} />
             <PopoverBody>
-              You&apos;ll get notification when someone likes your prompts.
+              You&apos;ll get a notification when someone likes your prompts.
             </PopoverBody>
           </>
         )}
