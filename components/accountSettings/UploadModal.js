@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   Tooltip,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import {
   Slider,
@@ -18,6 +18,10 @@ import {
   SliderThumb,
   SliderMark,
 } from "@chakra-ui/react";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useAuth } from "../context/AuthContextProvider";
+import { auth, storage } from "../../config/firebase";
+import { updateProfile } from "firebase/auth";
 
 const canvasToFile = (canvas) => {
   const promise = new Promise((resolve) => {
@@ -39,20 +43,66 @@ const UploadModal = ({
   sliderValue,
   setSliderValue,
 }) => {
-  const [showTooltip, setShowTooltip] = React.useState(false);
-  const [editor, setEditor] = React.useState("");
-
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [editor, setEditor] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { userInfo, setUserInfo } = useAuth();
   const setEditorRef = (editor) => setEditor(editor);
   const onClickSave = async () => {
+    setIsLoading(true);
     const canvas = editor.getImageScaledToCanvas();
     const file = await canvasToFile(canvas);
     console.log(file);
     // upload to Firebase Storage
 
-    // update user avatar
+    const metadata = {
+      contentType: "image/png",
+    };
 
-    // close modal
-    onClose();
+    let fileName = `${userInfo.uid}-${file.size}-avatar.png`;
+    const avatarRef = ref(storage, "images/" + fileName);
+    const uploadTask = uploadBytesResumable(avatarRef, file, metadata);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+
+        switch (error.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+
+          // ...
+
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          updateProfile(auth.currentUser, {
+            photoURL: downloadURL,
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              setUserInfo({ ...userInfo, photoURL: downloadURL });
+              setIsLoading(false);
+              onClose();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }
+    );
   };
   return (
     <>
@@ -124,7 +174,8 @@ const UploadModal = ({
               colorScheme="teal"
               size={"lg"}
               loadingText="Uploading..."
-              //   isLoading={true}
+              isLoading={isLoading}
+              disabled={isLoading}
             >
               Save & Upload
             </Button>

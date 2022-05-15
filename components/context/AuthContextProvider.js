@@ -42,13 +42,11 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         const { displayName, photoURL, email, uid } = user;
         setUserInfo({ displayName, photoURL, email, uid });
         setAuthState({ isAuthStateReady: true, isAuthenticated: true });
       } else {
         // User is signed out
-        console.log(user);
         setUserInfo(null);
         setAuthState({ isAuthStateReady: true, isAuthenticated: false });
       }
@@ -57,7 +55,7 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ ...authState, userInfo, loginWithGoogle, logOut }}
+      value={{ ...authState, userInfo, setUserInfo, loginWithGoogle, logOut }}
     >
       {children}
     </AuthContext.Provider>
