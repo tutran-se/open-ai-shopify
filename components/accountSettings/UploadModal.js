@@ -77,20 +77,20 @@ const UploadModal = ({
       (error) => {
         console.log(error);
 
-        switch (error.code) {
-          case "storage/unauthorized":
-            // User doesn't have permission to access the object
-            break;
-          case "storage/canceled":
-            // User canceled the upload
-            break;
+        // switch (error.code) {
+        //   case "storage/unauthorized":
+        //     // User doesn't have permission to access the object
+        //     break;
+        //   case "storage/canceled":
+        //     // User canceled the upload
+        //     break;
 
-          // ...
+        //   // ...
 
-          case "storage/unknown":
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
+        //   case "storage/unknown":
+        //     // Unknown error occurred, inspect error.serverResponse
+        //     break;
+        // }
       },
       () => {
         // Upload completed successfully, now we can get the download URL

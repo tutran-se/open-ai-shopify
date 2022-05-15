@@ -103,7 +103,7 @@ const Notifications = () => {
             <PopoverArrow />
             <PopoverCloseButton />
             <PopoverBody>
-              You'll get notification when someone likes your prompts.
+              You&apos;ll get notification when someone likes your prompts.
             </PopoverBody>
           </>
         )}

@@ -49,7 +49,7 @@ const ResultItem = ({ item }) => {
         </HStack>
       </Box>
       <Text padding={4} fontSize={14} fontStyle="italic">
-        "{answer}"
+        &quot;{answer} &quot;
       </Text>
       <Text
         px={4}

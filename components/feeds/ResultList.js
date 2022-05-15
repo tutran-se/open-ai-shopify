@@ -165,7 +165,7 @@ const ResultList = () => {
           </Button>
         </Center>
       ) : (
-        <>{total > 5 && <Center mt={4}>🤷 Ooops, That's all.</Center>}</>
+        <>{total > 5 && <Center mt={4}>🤷 Ooops, That&apos;s all.</Center>}</>
       )}
     </Box>
   );
