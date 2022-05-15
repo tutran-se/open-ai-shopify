@@ -13,7 +13,7 @@ Open AI - Shopify Challenge 2022
 - all features get updated in real-time
 
 ### LINK DEMO
-https://nextjs.org/docs
+https://open-ai-shopify.vercel.app
 
 ### TECHNOLOGIES
 - Nextjs
