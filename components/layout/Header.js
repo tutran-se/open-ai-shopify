@@ -19,6 +19,7 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import NextLink from "next/link";
 import { useAuth } from "../context/AuthContextProvider";
 import Notifications from "./Notifications";
+import Image from "next/image";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -42,8 +43,20 @@ const Header = () => {
         <Notifications />
         <Menu placement="bottom-end">
           <MenuButton>
-            <WrapItem cursor="pointer">
-              <Avatar name={displayName} src={photoURL} />
+            <WrapItem
+              cursor="pointer"
+              position={"relative"}
+              overflow="hidden"
+              width={"50px"}
+              height="50px"
+              borderRadius={"100%"}
+            >
+              <Image
+                src={photoURL}
+                alt="avatar"
+                objectFit="cover"
+                layout="fill"
+              />
             </WrapItem>
           </MenuButton>
           <MenuList>

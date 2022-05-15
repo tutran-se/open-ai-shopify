@@ -7,6 +7,7 @@ import {
   VStack,
   WrapItem,
 } from "@chakra-ui/react";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContextProvider";
 import UploadModal from "./UploadModal";
@@ -22,7 +23,6 @@ const AccountSettings = () => {
   const [file, setFile] = useState("");
   const onFileChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     setSampleImage(file);
     onOpen();
   };
@@ -35,8 +35,15 @@ const AccountSettings = () => {
   return (
     <Center h="80vh">
       <VStack>
-        <WrapItem>
-          <Avatar name={displayName} src={photoURL} />
+        <WrapItem
+          cursor="pointer"
+          position={"relative"}
+          overflow="hidden"
+          width={"50px"}
+          height="50px"
+          borderRadius={"100%"}
+        >
+          <Image src={photoURL} alt="avatar" objectFit="cover" layout="fill" />
         </WrapItem>
         <Text>
           {email} - {displayName}

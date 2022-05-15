@@ -1,6 +1,5 @@
 import Axios from "axios";
 
-console.log(process.env.NODE_ENV);
 const BASE_URL = "https://api.openai.com/v1/engines";
 
 // Config Axios

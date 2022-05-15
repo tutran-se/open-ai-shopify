@@ -65,7 +65,6 @@ export const useGetAllNotifications = () => {
         const item = { id: doc.id, ...doc.data() };
         items.push(item);
       });
-      console.log(items);
       setData(items);
     });
     return unsubscribe;

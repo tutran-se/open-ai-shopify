@@ -67,7 +67,6 @@ export const useGetResultLists = ({ pageSize }) => {
       const docRef = doc(db, "appInfo", "totalFeedsCount");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log(docSnap.data().total);
         setTotal(docSnap.data().total);
       }
     } catch (error) {

@@ -116,11 +116,8 @@ const UploadModal = ({
                   allFeedIds.push(doc.id);
                   // console.log(doc.id, " => ", doc.data());
                 });
-                console.log(allFeedIds);
 
                 for (const id of allFeedIds) {
-                  console.log("run");
-                  console.log(downloadURL);
                   const docRef = doc(db, "feeds", id);
                   await updateDoc(docRef, {
                     "creator.photoURL": downloadURL,

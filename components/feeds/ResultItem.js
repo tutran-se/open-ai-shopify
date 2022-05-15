@@ -5,6 +5,7 @@ import { Tooltip } from "@chakra-ui/react";
 import { auth } from "../../config/firebase";
 import { format, formatDistance } from "date-fns";
 import { updateLike } from "../../libs/feeds";
+import Image from "next/image";
 
 const ResultItem = ({ item }) => {
   const {
@@ -30,8 +31,20 @@ const ResultItem = ({ item }) => {
       <Box bg={"whiteAlpha.200"} p={2}>
         <HStack>
           <Tooltip label={displayName}>
-            <WrapItem>
-              <Avatar name={displayName} src={photoURL} size={"sm"} />
+            <WrapItem
+              cursor="pointer"
+              position={"relative"}
+              overflow="hidden"
+              width={"30px"}
+              height="30px"
+              borderRadius={"100%"}
+            >
+              <Image
+                src={photoURL}
+                alt="avatar"
+                objectFit="cover"
+                layout="fill"
+              />
             </WrapItem>
           </Tooltip>
 

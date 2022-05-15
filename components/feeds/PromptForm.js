@@ -10,8 +10,6 @@ const PromptForm = () => {
   const onFormSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(prompt);
-    console.log(engineId);
     await createFeed({ prompt, engineId });
     setIsLoading(false);
     setPrompt("");
