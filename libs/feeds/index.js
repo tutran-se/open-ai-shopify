@@ -18,6 +18,7 @@ import {
 import { auth, db } from "../../config/firebase";
 import { getAnswer } from "../../config/axios";
 import { useState, useEffect } from "react";
+import { createNotification } from "../notifications";
 
 // create an item
 
@@ -104,16 +105,20 @@ export const useGetResultLists = ({ pageSize }) => {
 };
 
 // like or unlike
-export const updateLike = async ({ action, itemId }) => {
+export const updateLike = async ({ action, item }) => {
   try {
     const { uid } = auth.currentUser;
     let incrementAmount = action === "LIKE" ? 1 : -1;
 
-    const docRef = doc(db, "feeds", itemId);
+    const docRef = doc(db, "feeds", item.id);
     await updateDoc(docRef, {
       totalLike: increment(incrementAmount),
       whoLikes: action === "LIKE" ? arrayUnion(uid) : arrayRemove(uid),
     });
+
+    if (action === "LIKE") {
+      await createNotification({ item });
+    }
   } catch (error) {
     console.log(error);
   }

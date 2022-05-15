@@ -14,7 +14,7 @@ const ResultItem = ({ item }) => {
     prompt,
     totalLike,
     whoLikes,
-    creator: { displayName, photoURL, uid },
+    creator: { displayName, photoURL },
   } = item;
   const user = auth.currentUser;
   const isLikedByCurrentUser =
@@ -29,7 +29,7 @@ const ResultItem = ({ item }) => {
     >
       <Box bg={"whiteAlpha.200"} p={2}>
         <HStack>
-          <Tooltip label="Dan Abrahmov">
+          <Tooltip label={displayName}>
             <WrapItem>
               <Avatar name={displayName} src={photoURL} size={"sm"} />
             </WrapItem>
@@ -62,20 +62,22 @@ const ResultItem = ({ item }) => {
       </Text>
 
       <HStack p={4}>
-        {totalLike > 0 && <Text fontSize={14}>{totalLike}</Text>}
+        <Text fontSize={14} hidden={totalLike === 0}>
+          {totalLike}
+        </Text>
 
         {isLikedByCurrentUser && (
           <AiFillHeart
             color="#ff6c6c"
             cursor={"pointer"}
-            onClick={() => updateLike({ action: "REMOVE_LIKE", itemId: id })}
+            onClick={() => updateLike({ action: "REMOVE_LIKE", item })}
           />
         )}
         {!isLikedByCurrentUser && (
           <AiOutlineHeart
             color="#ff6c6c"
             cursor={"pointer"}
-            onClick={() => updateLike({ action: "LIKE", itemId: id })}
+            onClick={() => updateLike({ action: "LIKE", item })}
           />
         )}
       </HStack>

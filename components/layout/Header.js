@@ -1,33 +1,24 @@
 import {
   Avatar,
-  Badge,
   Box,
-  Divider,
   HStack,
   Menu,
   MenuButton,
   MenuGroup,
   MenuItem,
   MenuList,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
   Text,
   useColorMode,
-  VStack,
   WrapItem,
 } from "@chakra-ui/react";
 import React from "react";
 import Logo from "../logo/Logo";
-import { BsFillMoonFill, BsFillSunFill, BsFillBellFill } from "react-icons/bs";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import NextLink from "next/link";
 import { useAuth } from "../context/AuthContextProvider";
+import Notifications from "./Notifications";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -35,6 +26,7 @@ const Header = () => {
     userInfo: { displayName, photoURL },
     logOut,
   } = useAuth();
+
   return (
     <Box display="flex" alignItems="center" py={5}>
       <Logo isClickable={true} width="30px" height="30px" />
@@ -47,80 +39,7 @@ const Header = () => {
           )}
         </Text>
 
-        <Popover isLazy placement="auto" autoFocus={false}>
-          <PopoverTrigger>
-            <Text color={"gray.400"} display="flex" cursor={"pointer"}>
-              <BsFillBellFill size={20} />
-              <Badge variant="solid" colorScheme="red">
-                3
-              </Badge>
-            </Text>
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverHeader fontWeight="semibold" py={4}>
-              Notifications [3]
-            </PopoverHeader>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverBody>
-              <VStack>
-                <HStack>
-                  <WrapItem cursor="pointer">
-                    <Avatar
-                      name="Dan Abrahmov"
-                      src="https://bit.ly/dan-abramov"
-                      size={"sm"}
-                    />
-                  </WrapItem>
-                  <Box>
-                    <Text>Tom Cruise just like your prompt</Text>
-                    <Text color={"gray.400"} fontSize="sm">
-                      2 minutes ago
-                    </Text>
-                  </Box>
-                </HStack>
-                <Divider />
-                <HStack>
-                  <WrapItem cursor="pointer">
-                    <Avatar
-                      name="Dan Abrahmov"
-                      src="https://bit.ly/dan-abramov"
-                      size={"sm"}
-                    />
-                  </WrapItem>
-                  <Box>
-                    <Text>Tom Cruise just like your prompt</Text>
-                    <Text color={"gray.400"} fontSize="sm">
-                      2 minutes ago
-                    </Text>
-                  </Box>
-                </HStack>
-                <Divider />
-                <HStack>
-                  <WrapItem cursor="pointer">
-                    <Avatar
-                      name="Dan Abrahmov"
-                      src="https://bit.ly/dan-abramov"
-                      size={"sm"}
-                    />
-                  </WrapItem>
-                  <Box>
-                    <Text>Tom Cruise just like your prompt</Text>
-                    <Text color={"gray.400"} fontSize="sm">
-                      2 minutes ago
-                    </Text>
-                  </Box>
-                </HStack>
-              </VStack>
-            </PopoverBody>
-            {/* <PopoverHeader fontWeight="semibold">No Notification</PopoverHeader>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverBody>
-              You'll get notification when someone likes your prompts.
-            </PopoverBody> */}
-          </PopoverContent>
-        </Popover>
+        <Notifications />
         <Menu placement="bottom-end">
           <MenuButton>
             <WrapItem cursor="pointer">
