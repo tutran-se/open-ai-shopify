@@ -11,6 +11,9 @@ const AuthContext = React.createContext();
 
 const googleProvider = new GoogleAuthProvider();
 
+googleProvider.setCustomParameters({
+  prompt: "select_account",
+});
 const AuthContextProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     isAuthStateReady: false,
