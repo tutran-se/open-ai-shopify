@@ -1,9 +1,11 @@
 import { Button, Center, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { BsGoogle, BsGithub } from "react-icons/bs";
+import { useAuth } from "../context/AuthContextProvider";
 import Logo from "../logo/Logo";
 
 const Home = () => {
+  const { loginWithGoogle, loginWithGitHub } = useAuth();
   return (
     <Center h="100vh" color="white" flexDirection="column">
       <Logo className="vibrate-1" />
@@ -15,12 +17,9 @@ const Home = () => {
       <br />
 
       <VStack spacing={3}>
-        <Button colorScheme="teal" size="lg">
+        <Button colorScheme="teal" size="lg" onClick={loginWithGoogle}>
           <BsGoogle />
           &nbsp; Login with Google
-        </Button>
-        <Button colorScheme="teal" size="lg">
-          <BsGithub /> &nbsp;Login with GitHub
         </Button>
       </VStack>
       <br />

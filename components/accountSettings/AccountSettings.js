@@ -8,9 +8,13 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
+import { useAuth } from "../context/AuthContextProvider";
 import UploadModal from "./UploadModal";
 
 const AccountSettings = () => {
+  const {
+    userInfo: { displayName, photoURL, email },
+  } = useAuth();
   const inputFileRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [sliderValue, setSliderValue] = React.useState(1.2);
@@ -31,10 +35,13 @@ const AccountSettings = () => {
   return (
     <Center h="80vh">
       <VStack>
-        <WrapItem cursor="pointer">
-          <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+        <WrapItem>
+          <Avatar name={displayName} src={photoURL} />
         </WrapItem>
-        <Text>tutran@gmail.com - Tu Tran</Text>
+        <Text>
+          {email} - {displayName}
+        </Text>
+        <br />
         <form>
           <Button type="button" onClick={() => inputFileRef.current.click()}>
             Change Avatar

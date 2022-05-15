@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
+import AuthContextProvider from "../components/context/AuthContextProvider";
 
 const theme = extendTheme({
   fonts: {
@@ -16,9 +17,11 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Container maxW="container.sm">
-        <Component {...pageProps} />
-      </Container>
+      <AuthContextProvider>
+        <Container maxW="container.sm">
+          <Component {...pageProps} />
+        </Container>
+      </AuthContextProvider>
     </ChakraProvider>
   );
 }

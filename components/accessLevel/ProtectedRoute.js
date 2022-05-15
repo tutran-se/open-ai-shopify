@@ -1,11 +1,21 @@
-import { Box, Center, Heading, Text } from "@chakra-ui/react";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useAuth } from "../context/AuthContextProvider";
 import PageLoader from "../loader/PageLoader";
-import Logo from "../logo/Logo";
 
 const ProtectedRoute = ({ children }) => {
-  const loading = true;
-  return <div>{loading ? <PageLoader /> : <>{children}</>}</div>;
+  const { isAuthStateReady, isAuthenticated } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (isAuthStateReady && !isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthStateReady, isAuthenticated, router]);
+  return (
+    <div>
+      {!isAuthStateReady ? <PageLoader /> : <>{isAuthenticated && children}</>}
+    </div>
+  );
 };
 
 export default ProtectedRoute;

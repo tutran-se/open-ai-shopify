@@ -6,14 +6,16 @@ import Layout from "../components/layout/Layout";
 
 const AccountSettingsPage = () => {
   return (
-    <ProtectedRoute>
+    <>
       <Head>
         <title>Account Settings | Open API - Shopify Challenge</title>
       </Head>
-      <Layout>
-        <AccountSettings />
-      </Layout>
-    </ProtectedRoute>
+      <ProtectedRoute>
+        <Layout>
+          <AccountSettings />
+        </Layout>
+      </ProtectedRoute>
+    </>
   );
 };
 
