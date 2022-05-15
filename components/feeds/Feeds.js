@@ -21,7 +21,8 @@ const Feeds = () => {
             <AlertIcon />
             <Text>
               &quot;To experience real-time updates, please open 2 browser tabs
-              or login with 2 accounts simultaneously. Hope you like it&quot;. -{" "}
+              or log in with 2 accounts simultaneously. Hope you like it.&quot;
+              -
               <Link
                 textDecor="underline"
                 href="https://github.com/tutran-se"

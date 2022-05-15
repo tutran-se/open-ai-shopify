@@ -23,7 +23,7 @@ import Image from "next/image";
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const {
-    userInfo: { displayName, photoURL },
+    userInfo: { photoURL },
     logOut,
   } = useAuth();
 
