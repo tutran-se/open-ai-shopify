@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <AuthContextProvider>
-        <Container maxW="container.sm">
+        <Container maxW="container.md">
           <Component {...pageProps} />
         </Container>
       </AuthContextProvider>

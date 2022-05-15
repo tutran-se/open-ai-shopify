@@ -1,7 +1,17 @@
-import { Box, useColorMode, VStack } from "@chakra-ui/react";
-import React from "react";
+import {
+  Box,
+  Button,
+  Center,
+  SkeletonCircle,
+  SkeletonText,
+  useColorMode,
+  VStack,
+} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
 import ResultItem from "./ResultItem";
 import styled from "styled-components";
+import { useGetResultLists } from "../../libs/feeds";
+
 const CustomStack = styled(VStack)`
   position: relative;
   & {
@@ -83,14 +93,80 @@ const CustomStack = styled(VStack)`
 
 const ResultList = () => {
   const { colorMode } = useColorMode();
+  let [pageSize, setPageSize] = useState(5);
+  const { total, data, isLoading, isLoading2 } = useGetResultLists({
+    pageSize,
+  });
+  console.log(data);
+
   return (
     <Box mt={"16"}>
       <CustomStack colormode={colorMode}>
-        <ResultItem />
-        <ResultItem />
-        <ResultItem />
-        <ResultItem />
+        {isLoading ? (
+          <>
+            {Array(5)
+              .fill("")
+              .map((_, index) => {
+                return (
+                  <Box
+                    key={index}
+                    border={"1px"}
+                    borderColor="gray.600"
+                    rounded="md"
+                    boxShadow="lg"
+                    position={"relative"}
+                  >
+                    <Box p={4}>
+                      <SkeletonCircle size="10" />
+                      <SkeletonText mt="4" noOfLines={4} spacing="4" />
+                    </Box>
+                  </Box>
+                );
+              })}
+          </>
+        ) : (
+          <>
+            {data.length > 0 &&
+              data.map((item) => <ResultItem key={item.id} item={item} />)}
+          </>
+        )}
+        {isLoading2 && (
+          <>
+            {Array(5)
+              .fill("")
+              .map((_, index) => {
+                return (
+                  <Box
+                    key={index}
+                    border={"1px"}
+                    borderColor="gray.600"
+                    rounded="md"
+                    boxShadow="lg"
+                    position={"relative"}
+                  >
+                    <Box p={4}>
+                      <SkeletonCircle size="10" />
+                      <SkeletonText mt="4" noOfLines={4} spacing="4" />
+                    </Box>
+                  </Box>
+                );
+              })}
+          </>
+        )}
       </CustomStack>
+
+      {total >= pageSize ? (
+        <Center mt={4}>
+          <Button
+            colorScheme={"orange"}
+            onClick={() => setPageSize(pageSize + 5)}
+          >
+            👋 Load More
+          </Button>
+        </Center>
+      ) : (
+        <>{total > 5 && <Center mt={4}>🤷 Ooops, That's all.</Center>}</>
+      )}
     </Box>
   );
 };
