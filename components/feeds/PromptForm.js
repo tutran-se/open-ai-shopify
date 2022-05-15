@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, FormControl, Input, Select, VStack } from "@chakra-ui/react";
+import { createFeed } from "../../libs/feeds";
 
 const PromptForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [engineId, setEngineId] = useState("text-curie-001");
-  const onFormSubmit = (e) => {
+  const inputRef = useRef();
+  const onFormSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log(prompt);
     console.log(engineId);
+    await createFeed({ prompt, engineId });
+    setIsLoading(false);
+    setPrompt("");
+    inputRef.current.focus();
   };
   return (
     <form onSubmit={onFormSubmit}>
@@ -20,6 +28,7 @@ const PromptForm = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             autoFocus={true}
+            ref={inputRef}
           />
         </FormControl>
         <FormControl>
@@ -39,10 +48,10 @@ const PromptForm = () => {
         <Button
           colorScheme="teal"
           size="lg"
-          disabled={!prompt.trim()}
+          disabled={!prompt.trim() || isLoading}
           type="submit"
-          // loadingText="Processing..."
-          // isLoading={true}
+          loadingText="Processing..."
+          isLoading={isLoading}
         >
           🚀 Get Result
         </Button>
