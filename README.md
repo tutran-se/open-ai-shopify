@@ -17,6 +17,8 @@ https://open-ai-shopify.vercel.app
 
 ### TECHNOLOGIES
 - Nextjs
+- Chakra UI
+- Styled-Component
 - Firebase
 
 ### IMAGES
