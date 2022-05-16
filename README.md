@@ -25,7 +25,7 @@ https://open-ai-shopify.vercel.app
 - Styled-Component
 - Firebase
 
-| **_Images_:** |
+| **_Screenshots_:** |
 |---|
 
 [![screenshot-rocks-7.png](https://i.postimg.cc/DyQnFgM5/screenshot-rocks-7.png)](https://postimg.cc/RN0jLc9n)
