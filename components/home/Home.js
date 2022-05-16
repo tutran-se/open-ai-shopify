@@ -5,11 +5,11 @@ import { useAuth } from "../context/AuthContextProvider";
 import Logo from "../logo/Logo";
 
 const Home = () => {
-  const { loginWithGoogle, loginWithGitHub } = useAuth();
+  const { loginWithGoogle } = useAuth();
   return (
     <Center h="100vh" flexDirection="column">
       <Logo className="vibrate-1" />
-      <Heading size="3xl" className="tracking-in-contract">
+      <Heading size="2xl" className="tracking-in-contract" fontWeight="900">
         Open AI
       </Heading>
       <Text mt="2"> - Shopify Challenge 2022 - </Text>
