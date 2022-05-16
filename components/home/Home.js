@@ -1,6 +1,6 @@
 import { Button, Center, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import React from "react";
-import { BsGoogle, BsGithub } from "react-icons/bs";
+import { BsGoogle } from "react-icons/bs";
 import { useAuth } from "../context/AuthContextProvider";
 import Logo from "../logo/Logo";
 
