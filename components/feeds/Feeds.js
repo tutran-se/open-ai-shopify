@@ -10,7 +10,8 @@ import {
 import React, { useState } from "react";
 import PromptForm from "./PromptForm";
 import ResultList from "./ResultList";
-
+import Image from "next/image";
+import robotSrc from "../../public/assets/robot.png";
 const Feeds = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(true);
   return (
@@ -40,19 +41,31 @@ const Feeds = () => {
           <br />
         </>
       )}
-
-      <Text fontSize={15} textAlign="center">
-        Open AI - Shopify Challenge 2022
-      </Text>
-      <Heading
-        fontWeight={900}
-        textAlign="center"
-        bgGradient="linear(to-r, #4da9ec, #ee3994)"
-        bgClip="text"
-        fontSize={["4xl", "4xl"]}
-      >
-        prompt me something.
-      </Heading>
+      <Box position={"relative"} mt={14}>
+        <Text fontSize={15} textAlign="center">
+          Open AI - Shopify Challenge 2022
+        </Text>
+        <Heading
+          fontWeight={900}
+          textAlign="center"
+          bgGradient="linear(to-r, #4da9ec, #ee3994)"
+          bgClip="text"
+          fontSize={["4xl", "4xl"]}
+        >
+          prompt me something?
+        </Heading>
+        <Box
+          position={"absolute"}
+          overflow="hidden"
+          width={"175px"}
+          height="175px"
+          borderRadius={"100%"}
+          top="-121px"
+          left="94px"
+        >
+          <Image src={robotSrc} alt="avatar" objectFit="cover" layout="fill" />
+        </Box>
+      </Box>
 
       <br />
       <PromptForm />
