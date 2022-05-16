@@ -27,7 +27,7 @@ https://open-ai-shopify.vercel.app
 
 | **_Images_:** |
 |---|
-
+[![screenshot-rocks-6.png](https://i.postimg.cc/g2pQDb4H/screenshot-rocks-6.png)](https://postimg.cc/bs6myM7Z)
 [![screenshot-rocks-1.png](https://i.postimg.cc/4x1bRDGP/screenshot-rocks-1.png)](https://postimg.cc/ZWCyrDCv)
-[![screenshot-rocks.png](https://i.postimg.cc/50zXbzvJ/screenshot-rocks.png)](https://postimg.cc/vgQYvc32)
+
 
