@@ -1,4 +1,3 @@
-![image](http://assets.stickpng.com/images/58482ec0cef1014c0b5e4a70.png)
 Open AI - Shopify Challenge 2022
 
 | **_Features_:** |
