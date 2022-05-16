@@ -20,10 +20,10 @@ const Feeds = () => {
         <>
           <Alert status="info">
             <AlertIcon />
-            <Text>
+            <Text fontSize={["12px", "14px"]} fontStyle="italic">
               &quot;To experience real-time updates, please open 2 browser tabs
               or log in with 2 accounts simultaneously. Hope you like it.&quot;
-              -
+              -&nbsp;
               <Link
                 textDecor="underline"
                 href="https://github.com/tutran-se"
@@ -57,8 +57,8 @@ const Feeds = () => {
         <Box
           position={"absolute"}
           overflow="hidden"
-          width={"175px"}
-          height="175px"
+          width={["125px", "140px", "175px", "175px"]}
+          height={["125px", "140px", "175px", "175px"]}
           borderRadius={"100%"}
           top="-121px"
           left="94px"
