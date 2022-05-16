@@ -7,7 +7,7 @@ import {
   useColorMode,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ResultItem from "./ResultItem";
 import styled from "styled-components";
 import { useGetResultLists } from "../../libs/feeds";
