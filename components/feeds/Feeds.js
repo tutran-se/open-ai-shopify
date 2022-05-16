@@ -20,7 +20,7 @@ const Feeds = () => {
         <>
           <Alert status="info">
             <AlertIcon />
-            <Text fontSize={["12px", "14px"]} fontStyle="italic">
+            <Text fontSize={["12px", "15px"]} fontStyle="italic">
               &quot;To experience real-time updates, please open 2 browser tabs
               or log in with 2 accounts simultaneously. Hope you like it.&quot;
               -&nbsp;
