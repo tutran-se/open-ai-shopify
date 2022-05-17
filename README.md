@@ -1,4 +1,4 @@
-Open AI - Shopify Challenge 2022
+### Open AI - Shopify Challenge 2022
 
 | **_Features_:** |
 |---|
