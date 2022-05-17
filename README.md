@@ -26,6 +26,11 @@ https://open-ai-shopify.vercel.app
 - Styled-Component
 - Firebase
 
+| **_Chrome Light House_:** |
+|---|
+
+[![lighthouse.png](https://i.postimg.cc/rsktCFV4/lighthouse.png)](https://postimg.cc/k6T47CtM)
+
 | **_Screenshots_:** |
 |---|
 
