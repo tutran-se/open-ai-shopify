@@ -10,6 +10,7 @@ Open AI - Shopify Challenge 2022
 - change avatar picture
 - get notified when someone like your prompts
 - dark/light mode
+- infinite scrolling
 - all features get updated in real-time
 
 | **_Link Demo_:** |
