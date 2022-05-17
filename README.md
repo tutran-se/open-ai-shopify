@@ -6,7 +6,7 @@
 - submit a prompt  + get the result
 - see a list of prompt/response in order of newest to oldest
 - like/unlike prompt
-- login with a Google account
+- log in with a Google account
 - change avatar picture
 - get notified when someone like your prompts
 - dark/light mode
