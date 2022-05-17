@@ -101,7 +101,6 @@ const ResultList = () => {
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
-      console.log(target);
       if (target.isIntersecting) {
         console.log("intersecting");
         setPageSize(pageSize + 5);
@@ -173,11 +172,11 @@ const ResultList = () => {
               })}
           </>
         )}
-        {data.length % 5 === 0 &&
-          total >= pageSize &&
-          !isLoading &&
-          !isLoading2 && <div ref={loader} />}
       </CustomStack>
+      {data.length % 5 === 0 &&
+        total >= pageSize &&
+        !isLoading &&
+        !isLoading2 && <div ref={loader} />}
       <>
         {total < pageSize && total > 5 && (
           <Center mt={4}>👋 Ooops, That&apos;s all.</Center>
