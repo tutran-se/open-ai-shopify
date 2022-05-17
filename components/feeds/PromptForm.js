@@ -13,10 +13,13 @@ import { createFeed } from "../../libs/feeds";
 const PromptForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
-  const [engineId, setEngineId] = useState("text-curie-001");
+  const [engineId, setEngineId] = useState("unselected");
   const inputRef = useRef();
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    if (engineId === "unselected") {
+      return null;
+    }
     setIsLoading(true);
     await createFeed({ prompt, engineId });
     setIsLoading(false);
@@ -33,7 +36,12 @@ const PromptForm = () => {
             type="text"
             placeholder="e.g: Write a poem about dog"
             value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.trim().length === 0) {
+                setEngineId("unselected");
+              }
+              setPrompt(e.target.value);
+            }}
             autoFocus={true}
             ref={inputRef}
             size="lg"
@@ -42,31 +50,34 @@ const PromptForm = () => {
         </FormControl>
 
         <HStack
-          className={prompt.trim() ? "fade-in-left" : "fade-out-right"}
+          className={prompt.trim() && "fade-in-left"}
           hidden={!prompt.trim()}
         >
-          {/* {prompt.trim() && ( */}
           <FormControl>
             <Select
-              defaultValue={engineId}
+              value={engineId}
               onChange={(e) => setEngineId(e.target.value)}
             >
-              <option value="text-davinci-002">Engine: text-davinci-002</option>
-              <option value="text-curie-001">
-                Engine: text-curie-001 (Recommended)
+              <option value="unselected" hidden>
+                Select an AI engine
               </option>
-              <option value="text-babbage-001">Engine: text-babbage-001</option>
-              <option value="text-ada-001">Engine: text-ada-001</option>
+              <option value="text-davinci-002">Davinci - Most capable</option>
+              <option value="text-curie-001">
+                Curie - Less capable, but fast (Recommended)
+              </option>
+              <option value="text-babbage-001">
+                Babbage - Straightforward and fast
+              </option>
+              <option value="text-ada-001">Ada - Simple and fast</option>
             </Select>
           </FormControl>
-          {/* )} */}
         </HStack>
 
         <br />
         <Button
           colorScheme="teal"
           size="lg"
-          disabled={!prompt.trim() || isLoading}
+          disabled={!prompt.trim() || isLoading || engineId === "unselected"}
           type="submit"
           loadingText="Processing..."
           isLoading={isLoading}

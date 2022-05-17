@@ -63,7 +63,7 @@ const ResultItem = ({ item }) => {
             <Text mt={2}>
               <Tag colorScheme="green">
                 <AiOutlineSetting />
-                &nbsp;{engineId}
+                &nbsp;{String(engineId).split("-")[1]}
               </Tag>
             </Text>
           </Box>
