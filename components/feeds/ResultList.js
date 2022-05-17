@@ -7,7 +7,7 @@ import {
   useColorMode,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import ResultItem from "./ResultItem";
 import styled from "styled-components";
 import { useGetResultLists } from "../../libs/feeds";
@@ -97,7 +97,28 @@ const ResultList = () => {
   const { total, data, isLoading, isLoading2 } = useGetResultLists({
     pageSize,
   });
+  const loader = useRef(null);
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      console.log(target);
+      if (target.isIntersecting) {
+        console.log("intersecting");
+        setPageSize(pageSize + 5);
+      }
+    },
+    [pageSize]
+  );
 
+  useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0,
+    };
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+  }, [handleObserver, data]);
   return (
     <Box mt={"16"}>
       <CustomStack colormode={colorMode}>
@@ -152,20 +173,16 @@ const ResultList = () => {
               })}
           </>
         )}
+        {data.length % 5 === 0 &&
+          total >= pageSize &&
+          !isLoading &&
+          !isLoading2 && <div ref={loader} />}
       </CustomStack>
-
-      {total >= pageSize ? (
-        <Center mt={4}>
-          <Button
-            colorScheme={"orange"}
-            onClick={() => setPageSize(pageSize + 5)}
-          >
-            👋 Load More
-          </Button>
-        </Center>
-      ) : (
-        <>{total > 5 && <Center mt={4}>🤷 Ooops, That&apos;s all.</Center>}</>
-      )}
+      <>
+        {total < pageSize && total > 5 && (
+          <Center mt={4}>👋 Ooops, That&apos;s all.</Center>
+        )}
+      </>
     </Box>
   );
 };

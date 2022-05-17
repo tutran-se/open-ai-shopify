@@ -19,7 +19,7 @@ const Home = () => {
       <VStack spacing={3}>
         <Button colorScheme="teal" size="lg" onClick={loginWithGoogle}>
           <BsGoogle />
-          &nbsp; Login with Google
+          &nbsp; Log in with Google
         </Button>
       </VStack>
       <br />
