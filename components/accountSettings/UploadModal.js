@@ -60,9 +60,6 @@ const UploadModal = ({
     setIsLoading(true);
     const canvas = editor.getImageScaledToCanvas();
     const file = await canvasToFile(canvas);
-    console.log(file);
-    // upload to Firebase Storage
-
     const metadata = {
       contentType: "image/png",
     };
@@ -76,21 +73,6 @@ const UploadModal = ({
       (snapshot) => {},
       (error) => {
         console.log(error);
-
-        // switch (error.code) {
-        //   case "storage/unauthorized":
-        //     // User doesn't have permission to access the object
-        //     break;
-        //   case "storage/canceled":
-        //     // User canceled the upload
-        //     break;
-
-        //   // ...
-
-        //   case "storage/unknown":
-        //     // Unknown error occurred, inspect error.serverResponse
-        //     break;
-        // }
       },
       () => {
         // Upload completed successfully, now we can get the download URL
@@ -100,7 +82,6 @@ const UploadModal = ({
           })
             .then(async () => {
               // Profile updated!
-              // ...
               setUserInfo({ ...userInfo, photoURL: downloadURL });
 
               // update all feed items that belong to this user
@@ -112,9 +93,7 @@ const UploadModal = ({
                 const querySnapshot = await getDocs(q);
                 const allFeedIds = [];
                 querySnapshot.forEach((doc) => {
-                  // doc.data() is never undefined for query doc snapshots
                   allFeedIds.push(doc.id);
-                  // console.log(doc.id, " => ", doc.data());
                 });
 
                 for (const id of allFeedIds) {
