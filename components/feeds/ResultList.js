@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Center,
   SkeletonCircle,
   SkeletonText,
@@ -148,9 +149,9 @@ const ResultList = () => {
               data.map((item) => <ResultItem key={item.id} item={item} />)}
           </>
         )}
-        {isLoading2 && total >= pageSize && (
+        {isLoading2 && (
           <>
-            {Array(total - pageSize >= 5 ? 5 : total - pageSize)
+            {Array(5)
               .fill("")
               .map((_, index) => {
                 return (
@@ -177,7 +178,7 @@ const ResultList = () => {
         !isLoading &&
         !isLoading2 && <div ref={loader} />}
       <>
-        {total < pageSize && total > 5 && (
+        {!loader.current && total < pageSize && total > 5 && (
           <Center mt={4}>👋 Ooops, That&apos;s all.</Center>
         )}
       </>
