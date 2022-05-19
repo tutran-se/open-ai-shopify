@@ -149,9 +149,9 @@ const ResultList = () => {
               data.map((item) => <ResultItem key={item.id} item={item} />)}
           </>
         )}
-        {isLoading2 && (
+        {isLoading2 && total >= pageSize && (
           <>
-            {Array(5)
+            {Array(total - pageSize >= 5 ? 5 : total - pageSize)
               .fill("")
               .map((_, index) => {
                 return (
